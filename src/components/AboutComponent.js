@@ -1,13 +1,36 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardImgOverlay, CardTitle, CardImg, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
+function RenderPartner({partner}) {
+   if (partner) {
+    return (
+        <React.Fragment>
+            <Media object="true" src={partner.image} alt={partner.name} width="150"/>
+                <Media body="true" className="ml-5 mb-4"> 
+                <Media heading="true">
+                    {partner.name}
+                </Media>
+                    {partner.description}
+                </Media>
+        </React.Fragment>
+            );
+        }
+        else {
+            return (
+                <div />
+            );
+        }
+}
 
 function About(props) {
 
     const partners = props.partners.map(partner => {
         return (
-            <h5>{partner.name}</h5>
+        <Media tag="li" key={partner.id}>
+            <RenderPartner partner={partner} />
+            </Media>
         );
     });
 
